@@ -5,7 +5,7 @@
 
 
 int main() {
-    App application;
+    App *application = new App();
 
-    return application.OnExecute();
+    return application->OnExecute();
 }

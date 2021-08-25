@@ -4,7 +4,7 @@
 #include "GameState.h"
 
 // Source: https://gist.github.com/derofim/912cfc9161269336f722
-void _draw_filled_circle(SDL_Renderer *renderer, int cx, int cy, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+void _draw_filled_circle(SDL_Renderer *renderer, int cx, int cy, int radius, Color color)
 {
 	for (double dy = 1; dy <= radius; dy += 1.0)
 	{
@@ -18,7 +18,7 @@ void _draw_filled_circle(SDL_Renderer *renderer, int cx, int cy, int radius, Uin
 
 		double dx = floor(sqrt((2.0 * radius * dy) - (dy * dy)));
 		int x = cx - dx;
-		SDL_SetRenderDrawColor(renderer, r, g, b, a);
+		SDL_SetRenderDrawColor(renderer, color.red, color.green, color.blue, color.alpha);
 		SDL_RenderDrawLine(renderer, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
 		SDL_RenderDrawLine(renderer, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
 	}
@@ -28,6 +28,7 @@ void _draw_filled_circle(SDL_Renderer *renderer, int cx, int cy, int radius, Uin
 Renderer::Renderer(
   GameState *_game_state
 ) {
+  std::cout << "CREATING Renderer" << std::endl;
   game_state = _game_state;
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -111,24 +112,35 @@ void Renderer::Render() {
   // DRAW SLOTS
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
     for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
-      _draw_filled_circle(
-        sdl_renderer, slot_x_positions[x_slot_index], slot_y_positions[y_slot_index], slot_radius, empty_slot_colors[0], empty_slot_colors[1], empty_slot_colors[2], empty_slot_colors[3]);
+      GridCellValue grid_cell_value = game_state->grid_state[y_slot_index][x_slot_index];
+      if (grid_cell_value == EMPTY_GRID_CELL) {
+        _draw_filled_circle(
+          sdl_renderer, slot_x_positions[x_slot_index], slot_y_positions[y_slot_index], slot_radius, empty_slot_color);
+      } else if (grid_cell_value == YELLOW_GRID_CELL) {
+        _draw_filled_circle(
+          sdl_renderer, slot_x_positions[x_slot_index], slot_y_positions[y_slot_index], slot_radius, yellow_slot_color);
+      } else if (grid_cell_value == RED_GRID_CELL) {
+        _draw_filled_circle(
+          sdl_renderer, slot_x_positions[x_slot_index], slot_y_positions[y_slot_index], slot_radius, red_slot_color);
+      }
     }    
   }
 
-  // int[4] draw_colors = [0,0,0,0];
-  if (game_state->playerTurn == YELLOW_PLAYER_TURN) {
-    // draw_colors = yellow_slot_colors;
+  Color draw_color = empty_slot_color;
+  if (game_state->player_turn == YELLOW_PLAYER_TURN) {
+    draw_color = yellow_slot_color;
+  } else {
+    draw_color = red_slot_color;
   }
 
   // DRAW CHOICE DISK
-      _draw_filled_circle(
-        sdl_renderer,
-        slot_x_positions[0],
-        choice_disk_y,
-        slot_radius,
-        empty_slot_colors[0], empty_slot_colors[1], empty_slot_colors[2], empty_slot_colors[3]
-      );
+  _draw_filled_circle(
+    sdl_renderer,
+    slot_x_positions[game_state->player_slot_choice],
+    choice_disk_y,
+    slot_radius,
+    draw_color
+  );
 
 
 

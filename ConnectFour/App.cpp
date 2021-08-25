@@ -2,9 +2,10 @@
 
 #include "App.h"
 #include "GameState.h"
+#include <iostream>
 
 App::App() {
-    GameState *game_state = new GameState();
+  std::cout << "CREATING App" << std::endl;
     IsRunning = true;
 }
 

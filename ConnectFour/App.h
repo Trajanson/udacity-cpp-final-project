@@ -21,8 +21,8 @@ class App {
 
  private:
   bool IsRunning;
+  GameState *game_state = new GameState();
   Renderer *renderer;
-  GameState *game_state;
   
   static constexpr int number_of_slots_x{7};
   static constexpr int number_of_slots_y{6};

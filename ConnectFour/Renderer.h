@@ -8,6 +8,15 @@
 #include <SDL.h>
 #include <iostream>
 
+class Color {
+ public:
+  Color(int _red, int _green, int _blue, int _alpha):  red(_red), green(_green), blue(_blue), alpha(_alpha) {};
+
+  int red;
+  int green;
+  int blue;
+  int alpha;
+};
 
 class Renderer {
  public:
@@ -42,9 +51,9 @@ class Renderer {
 
   static constexpr int choice_disk_y = board_y - (slot_radius * 3);
 
-  static constexpr int empty_slot_colors[4] = {255, 255, 255, 1};
-  static constexpr int yellow_slot_colors[4] = {251, 226, 8, 1};
-  static constexpr int red_slot_colors[4] = {228, 0, 0, 1};
+  Color empty_slot_color = Color(255, 255, 255, 1);
+  Color yellow_slot_color = Color(251, 226, 8, 1);
+  Color red_slot_color = Color(228, 0, 0, 1);
 
 };
 

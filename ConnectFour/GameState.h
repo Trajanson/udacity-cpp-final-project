@@ -20,11 +20,25 @@ class GameState {
  public:
   GameState();
 
+  void ShiftSlotChoiceLeft();
+  void ShiftSlotChoiceRight();
+
+  void DropDiskIntoSlot();
+
+  bool IsColumnFull(int x_slot_index);
+  bool YellowPlayerHasWon();
+  bool RedPlayerHasWon();
+
+  bool HasPlayerHasWon(GridCellValue player_grid_cell_value);
+
+
   static constexpr int number_of_slots_x{7};
   static constexpr int number_of_slots_y{6};
 
+  int player_slot_choice{0};
+
   GridCellValue grid_state[number_of_slots_y][number_of_slots_x];
-  PlayerTurn playerTurn; 
+  PlayerTurn player_turn;
 };
 
 #endif  // CONNECTFOUR_GAMESTATE_H_
