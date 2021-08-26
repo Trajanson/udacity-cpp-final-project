@@ -60,11 +60,6 @@ Renderer::Renderer(
 
 
 
-
-
-
-
-
     const int x_shift_between_slots = (board_width - number_of_slots_x * (slot_radius * 2)) / (number_of_slots_x + 1);
     const int first_slot_x = board_x + x_shift_between_slots + slot_radius;
     int slot_x = first_slot_x;
@@ -89,27 +84,17 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render() {
-    SDL_Rect block;
-
-  // Clear screen
-  SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
-  SDL_RenderClear(sdl_renderer);
-
-
-  SDL_SetRenderDrawColor(sdl_renderer, 51, 39, 214, 1);
-
-  
+void Renderer::RenderBoard() {
+    SDL_Rect block;  
     block.w = board_width;
     block.h = board_height;
     block.x = board_x;
     block.y = board_y;
 
   SDL_RenderFillRect(sdl_renderer, &block);
+}
 
-
-
-  // DRAW SLOTS
+void Renderer::RenderBoardSlots() {
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
     for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
       GridCellValue grid_cell_value = game_state->grid_state[y_slot_index][x_slot_index];
@@ -125,7 +110,9 @@ void Renderer::Render() {
       }
     }    
   }
+}
 
+void Renderer::RenderChoiceDisk() {
   Color draw_color = empty_slot_color;
   if (game_state->player_turn == YELLOW_PLAYER_TURN) {
     draw_color = yellow_slot_color;
@@ -140,7 +127,22 @@ void Renderer::Render() {
     choice_disk_y,
     slot_radius,
     draw_color
-  );
+  );  
+}
+
+
+void Renderer::Render() {
+
+  // Clear screen
+  SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+  SDL_RenderClear(sdl_renderer);
+
+  SDL_SetRenderDrawColor(sdl_renderer, 51, 39, 214, 1);
+
+  RenderBoard();
+  RenderBoardSlots();
+  RenderChoiceDisk();
+
 
 
 

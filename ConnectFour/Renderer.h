@@ -24,6 +24,10 @@ class Renderer {
   void Render();
   ~Renderer();
  private:
+  void RenderBoard();
+  void RenderBoardSlots();
+  void RenderChoiceDisk();
+
   GameState *game_state;
 
   SDL_Window *sdl_window;
