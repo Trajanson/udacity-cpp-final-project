@@ -1,4 +1,4 @@
-// Copyright 2021 Julian Theoderik Trajanson
+// Copyright 2021 N/A
 
 #include <iostream>
 #include "App.h"

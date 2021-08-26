@@ -1,4 +1,4 @@
-// Copyright 2021 Julian Theoderik Trajanson
+// Copyright 2021 N/A
 
 #include "GameState.h"
 #include <iostream>
@@ -10,7 +10,8 @@ GameState::GameState() {
     player_turn = YELLOW_PLAYER_TURN;
 
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
-    for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
+    for (
+      int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
         grid_state[y_slot_index][x_slot_index] = EMPTY_GRID_CELL;
     }
   }
@@ -26,10 +27,11 @@ void GameState::ShiftSlotChoiceRight() {
 
 void GameState::DropDiskIntoSlot() {
   if (!IsColumnFull(player_slot_choice)) {
-
     int placed_y_slot_index = 0;
-    for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
-      GridCellValue grid_cell_value = grid_state[y_slot_index][player_slot_choice];
+    for (
+      int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
+      GridCellValue grid_cell_value = (
+        grid_state[y_slot_index][player_slot_choice]);
       if (grid_cell_value == EMPTY_GRID_CELL) {
         placed_y_slot_index = y_slot_index;
       }
@@ -40,18 +42,13 @@ void GameState::DropDiskIntoSlot() {
     } else {
       grid_state[placed_y_slot_index][player_slot_choice] = RED_GRID_CELL;
     }
-    
-    
 
     if (player_turn == YELLOW_PLAYER_TURN) {
       player_turn = RED_PLAYER_TURN;
     } else {
       player_turn = YELLOW_PLAYER_TURN;
     }
-
   }
-
-
 }
 
 bool GameState::IsColumnFull(int column_index) {
@@ -72,13 +69,15 @@ bool GameState::HasPlayerHasWon(GridCellValue player_grid_cell_value) {
 
   // COUNT DISKS HORIZONTALLY
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
-    for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
+    for (
+      int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
         GridCellValue grid_cell_value = grid_state[y_slot_index][x_slot_index];
         if (grid_cell_value == player_grid_cell_value) {
           if (x_slot_index == 0) {
             horizontal_disks_in_row[y_slot_index][x_slot_index] = 1;
           } else {
-            horizontal_disks_in_row[y_slot_index][x_slot_index] = horizontal_disks_in_row[y_slot_index][x_slot_index - 1] + 1;
+            horizontal_disks_in_row[y_slot_index][x_slot_index] = (
+              horizontal_disks_in_row[y_slot_index][x_slot_index - 1] + 1);
           }
         } else {
           horizontal_disks_in_row[y_slot_index][x_slot_index] = 0;
@@ -92,13 +91,15 @@ bool GameState::HasPlayerHasWon(GridCellValue player_grid_cell_value) {
 
   // COUNT DISKS VERTICALLY
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
-    for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
+    for (
+      int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
         GridCellValue grid_cell_value = grid_state[y_slot_index][x_slot_index];
         if (grid_cell_value == player_grid_cell_value) {
           if (y_slot_index == 0) {
             horizontal_disks_in_row[y_slot_index][x_slot_index] = 1;
           } else {
-            horizontal_disks_in_row[y_slot_index][x_slot_index] = horizontal_disks_in_row[y_slot_index - 1][x_slot_index] + 1;
+            horizontal_disks_in_row[y_slot_index][x_slot_index] = (
+              horizontal_disks_in_row[y_slot_index - 1][x_slot_index] + 1);
           }
         } else {
           horizontal_disks_in_row[y_slot_index][x_slot_index] = 0;
@@ -112,13 +113,15 @@ bool GameState::HasPlayerHasWon(GridCellValue player_grid_cell_value) {
 
   // COUNT DISKS DIAGONALLY
   for (int y_slot_index = 0; y_slot_index < number_of_slots_y; y_slot_index++) {
-    for (int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
+    for (
+      int x_slot_index = 0; x_slot_index < number_of_slots_x; x_slot_index++) {
         GridCellValue grid_cell_value = grid_state[y_slot_index][x_slot_index];
         if (grid_cell_value == player_grid_cell_value) {
           if (x_slot_index == 0 || y_slot_index == 0) {
             horizontal_disks_in_row[y_slot_index][x_slot_index] = 1;
           } else {
-            horizontal_disks_in_row[y_slot_index][x_slot_index] = horizontal_disks_in_row[y_slot_index - 1][x_slot_index - 1] + 1;
+            horizontal_disks_in_row[y_slot_index][x_slot_index] = (
+              horizontal_disks_in_row[y_slot_index - 1][x_slot_index - 1] + 1);
           }
         } else {
           horizontal_disks_in_row[y_slot_index][x_slot_index] = 0;

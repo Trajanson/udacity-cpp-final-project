@@ -1,10 +1,10 @@
-// Copyright 2021 Julian Theoderik Trajanson
+// Copyright 2021 N/A
 
 #include <iostream>
 #include "App.h"
 
 void App::OnEvent(SDL_Event* Event) {
-    if(Event->type == SDL_QUIT) {
+    if (Event->type == SDL_QUIT) {
         IsRunning = false;
     } else if (Event->type == SDL_KEYDOWN) {
         switch (Event->key.keysym.sym) {
@@ -16,6 +16,9 @@ void App::OnEvent(SDL_Event* Event) {
                 break;
             case SDLK_SPACE:
                 game_state->DropDiskIntoSlot();
+                break;
+            case SDLK_ESCAPE:
+                IsRunning = false;
                 break;
         }
     }

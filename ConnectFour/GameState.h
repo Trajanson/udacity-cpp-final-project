@@ -1,18 +1,17 @@
-// Copyright 2021 Julian Theoderik Trajanson
-
+// Copyright 2021 N/A
 
 #ifndef CONNECTFOUR_GAMESTATE_H_
 #define CONNECTFOUR_GAMESTATE_H_
 
 enum GridCellValue {
-  EMPTY_GRID_CELL=0,
-  YELLOW_GRID_CELL=1,
-  RED_GRID_CELL=2
+  EMPTY_GRID_CELL = 0,
+  YELLOW_GRID_CELL = 1,
+  RED_GRID_CELL = 2
 };
 
 enum PlayerTurn {
-  YELLOW_PLAYER_TURN=1,
-  RED_PLAYER_TURN=2
+  YELLOW_PLAYER_TURN = 1,
+  RED_PLAYER_TURN = 2
 };
 
 

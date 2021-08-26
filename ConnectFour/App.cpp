@@ -1,4 +1,4 @@
-// Copyright 2021 Julian Theoderik Trajanson
+// Copyright 2021 N/A
 
 #include "App.h"
 #include "GameState.h"
@@ -16,8 +16,8 @@ int App::OnExecute() {
 
     SDL_Event Event;
 
-    while(IsRunning) {
-        while(SDL_PollEvent(&Event)) {
+    while (IsRunning) {
+        while (SDL_PollEvent(&Event)) {
             OnEvent(&Event);
         }
         OnLoop();

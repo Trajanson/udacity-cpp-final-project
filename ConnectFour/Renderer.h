@@ -10,7 +10,8 @@
 
 class Color {
  public:
-  Color(int _red, int _green, int _blue, int _alpha):  red(_red), green(_green), blue(_blue), alpha(_alpha) {};
+  Color(int _red, int _green, int _blue, int _alpha):
+    red(_red), green(_green), blue(_blue), alpha(_alpha) {}
 
   int red;
   int green;
@@ -20,9 +21,10 @@ class Color {
 
 class Renderer {
  public:
-  Renderer(GameState *_game_state);
+  explicit Renderer(GameState *_game_state);
   void Render();
   ~Renderer();
+
  private:
   void RenderBoard();
   void RenderBoardSlots();
@@ -31,34 +33,37 @@ class Renderer {
   GameState *game_state;
 
   SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;  
+  SDL_Renderer *sdl_renderer;
 
   static constexpr int screen_height{640};
   static constexpr int screen_width{640};
 
-  static constexpr int number_of_slots_x{7};
-  static constexpr int number_of_slots_y{6};
+  static constexpr int kNumberOfSlotsX{7};
+  static constexpr int kNumberOfSlotsY{6};
 
   static constexpr float comparative_board_size_x = 0.8;
-  static constexpr float comparative_board_size_y = comparative_board_size_x * 6/7;
+  static constexpr float comparative_board_size_y = (
+    comparative_board_size_x * 6/7);
 
   static constexpr int board_width = comparative_board_size_x * screen_width;
   static constexpr int board_height = comparative_board_size_y * screen_height;
 
-  static constexpr int board_x = (1 - comparative_board_size_x) / 2 * screen_width;
-  static constexpr int board_y = (1 - comparative_board_size_y) * 0.7 * screen_height;
+  static constexpr int board_x = (
+    (1 - comparative_board_size_x) / 2 * screen_width);
+
+  static constexpr int board_y =(
+    (1 - comparative_board_size_y) * 0.7 * screen_height);
 
   static constexpr int slot_radius = board_height * 0.05;
 
-  int slot_x_positions[number_of_slots_x];
-  int slot_y_positions[number_of_slots_y];
+  int slot_x_positions[kNumberOfSlotsX];
+  int slot_y_positions[kNumberOfSlotsY];
 
   static constexpr int choice_disk_y = board_y - (slot_radius * 3);
 
   Color empty_slot_color = Color(255, 255, 255, 1);
   Color yellow_slot_color = Color(251, 226, 8, 1);
   Color red_slot_color = Color(228, 0, 0, 1);
-
 };
 
 #endif  // CONNECTFOUR_RENDERER_H_

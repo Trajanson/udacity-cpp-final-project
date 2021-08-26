@@ -1,5 +1,4 @@
-// Copyright 2021 Julian Theoderik Trajanson
-
+// Copyright 2021 N/A
 
 #ifndef CONNECTFOUR_APP_H_
 #define CONNECTFOUR_APP_H_
@@ -23,7 +22,7 @@ class App {
   bool IsRunning;
   GameState *game_state = new GameState();
   Renderer *renderer;
-  
+
   static constexpr int number_of_slots_x{7};
   static constexpr int number_of_slots_y{6};
 };
