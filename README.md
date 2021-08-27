@@ -37,7 +37,11 @@ Classes encapsulate behavior:
 ### Memory Management
 
 The project uses destructors appropriately:
-- `Renderer.cpp : 85`
+- `Renderer.h: 44`
+
+The project follows the Rule of 5.
+- `Renderer.cpp`
+
 
 
 
