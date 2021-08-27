@@ -21,9 +21,33 @@ class Color {
 
 class Renderer {
  public:
+  // CONSTRUCTOR
   explicit Renderer(GameState *_game_state);
-  void Render();
+
+  ////////////////////////////////////////////
+  // RULE OF FIVE
+  ////////////////////////////////////////////
+
+  // COPY CONSTRUCTOR
+  Renderer(const Renderer& other);
+
+  // MOVE CONSTRUCTOR
+  Renderer(Renderer&& other);
+
+  // COPY ASSIGNMENT OPERATOR
+  Renderer& operator=(const Renderer& other);
+
+  // MOVE ASSIGNMENT OPERATOR
+  Renderer& operator=(Renderer&& other);
+
+  // DESTRUCTOR
   ~Renderer();
+
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
+
+  void Render();
+
 
  private:
   void RenderBoard();

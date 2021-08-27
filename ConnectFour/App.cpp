@@ -9,7 +9,7 @@ App::App() {
     IsRunning = true;
 }
 
-int App::OnExecute() {
+int App::Execute() {
     if (OnInitialize() == false) {
         return -1;
     }

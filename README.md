@@ -1,5 +1,47 @@
 # Connect 4 - Usacity C++ Project
 
+## Project Description
+
+This is a project simulating the classic game [Connect 4](https://en.wikipedia.org/wiki/Connect_Four).
+
+## Project Structure
+
+C++ files are in the `./ConnectFour` directory. `main.cpp` creates an instance of the `App` class and calls its OnExecute()
+
+## Rubric Points
+
+### Loops, Functions, I/O
+
+The project demonstrates an understanding of C++ functions and control structures:
+- `App.cpp : 13,19`
+
+The project accepts user input and processes the input:
+- `OnEvent.cpp : 9`
+
+### Object Oriented Programming
+
+The project uses Object Oriented Programming techniques:
+- `GameState.h`
+- `GameState.cpp`
+
+Classes use appropriate access specifiers for class members:
+- `Renderer.h`
+
+Class constructors utilize member initialization lists:
+- `Renderer.h : 13`
+
+Classes encapsulate behavior:
+- `GameState.h`
+- `GameState.cpp`
+
+### Memory Management
+
+The project uses destructors appropriately:
+- `Renderer.cpp : 85`
+
+
+
+
 ## How to Play
 Players 1 and 2 take turns dropping disks into the empty slots. The first player to have four disks in a horizontal, vertical, or diagonal row wins!
 

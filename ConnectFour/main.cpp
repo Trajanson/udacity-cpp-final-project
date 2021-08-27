@@ -7,5 +7,5 @@
 int main() {
     App *application = new App();
 
-    return application->OnExecute();
+    return application->Execute();
 }

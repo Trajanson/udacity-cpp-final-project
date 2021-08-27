@@ -2,6 +2,7 @@
 
 #include "Renderer.h"
 #include "GameState.h"
+#include <SDL.h>
 
 // Source: https://gist.github.com/derofim/912cfc9161269336f722
 void _draw_filled_circle(
@@ -25,7 +26,6 @@ void _draw_filled_circle(
       renderer, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
   }
 }
-
 
 Renderer::Renderer(
   GameState *_game_state
@@ -82,10 +82,144 @@ Renderer::Renderer(
     }
 }
 
+  // MOVE CONSTRUCTOR
+Renderer::Renderer(const Renderer& other) {
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    std::cerr << "SDL could not initialize.\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+  }
+
+
+  sdl_window = SDL_CreateWindow(
+      "CONNECT FOUR!",
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
+    screen_width,
+    screen_height,
+    SDL_WINDOW_SHOWN
+);
+
+  if (nullptr == sdl_window) {
+    std::cerr << "Window could not be created.\n";
+    std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+  }
+
+  sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+  if (nullptr == sdl_renderer) {
+    std::cerr << "Renderer could not be created.\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+  }
+}
+
+// MOVE CONSTRUCTOR
+Renderer::Renderer(Renderer&& other) {
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    std::cerr << "SDL could not initialize.\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+  }
+
+
+  sdl_window = SDL_CreateWindow(
+      "CONNECT FOUR!",
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
+    screen_width,
+    screen_height,
+    SDL_WINDOW_SHOWN
+);
+
+  if (nullptr == sdl_window) {
+    std::cerr << "Window could not be created.\n";
+    std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+  }
+
+  sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+  if (nullptr == sdl_renderer) {
+    std::cerr << "Renderer could not be created.\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+  }
+
+  other.sdl_window = nullptr;
+  other.sdl_renderer = nullptr;
+}
+
+
+// COPY ASSIGNMENT OPERATOR
+Renderer& Renderer::operator=(const Renderer& other) {
+      if (&other != this) {
+        sdl_window = nullptr;
+        sdl_renderer = nullptr;
+
+      if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "SDL could not initialize.\n";
+        std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+      }
+
+
+      sdl_window = SDL_CreateWindow(
+          "CONNECT FOUR!",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        screen_width,
+        screen_height,
+        SDL_WINDOW_SHOWN);
+
+      if (nullptr == sdl_window) {
+        std::cerr << "Window could not be created.\n";
+        std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+      }
+
+      sdl_renderer = SDL_CreateRenderer(
+        sdl_window, -1, SDL_RENDERER_ACCELERATED);
+      if (nullptr == sdl_renderer) {
+        std::cerr << "Renderer could not be created.\n";
+        std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+      }
+    }
+
+      return *this;
+}
+
+Renderer& Renderer::operator=(Renderer&& other) {
+      if (&other != this) {
+        sdl_window = nullptr;
+        sdl_renderer = nullptr;
+
+      if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "SDL could not initialize.\n";
+        std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+      }
+
+
+      sdl_window = SDL_CreateWindow(
+          "CONNECT FOUR!",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        screen_width,
+        screen_height,
+        SDL_WINDOW_SHOWN);
+
+      if (nullptr == sdl_window) {
+        std::cerr << "Window could not be created.\n";
+        std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+      }
+
+      sdl_renderer = SDL_CreateRenderer(
+        sdl_window, -1, SDL_RENDERER_ACCELERATED);
+      if (nullptr == sdl_renderer) {
+        std::cerr << "Renderer could not be created.\n";
+        std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+      }
+    }
+
+      return *this;
+}
+
 Renderer::~Renderer() {
   SDL_DestroyWindow(sdl_window);
   SDL_Quit();
 }
+
 
 void Renderer::RenderBoard() {
     SDL_Rect block;

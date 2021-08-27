@@ -11,7 +11,7 @@ class App {
  public:
   App();
 
-  int OnExecute();
+  int Execute();
 
   bool OnInitialize();
   void OnEvent(SDL_Event* Event);
